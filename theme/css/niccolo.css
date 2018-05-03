@@ -1,0 +1,322 @@
+/*reset*/
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+a {
+    color: rgb(0, 77, 77);
+}
+
+/*end reset*/
+
+#cover{
+    background-color: rgb(77, 0, 0);
+    color: rgba(255,255,255,.85);
+}
+
+#title {
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+@media all and (min-width: 600px) {
+    #cover{
+        min-height: 25em;
+    }
+    
+    #title {
+        padding-top: 6em;
+    }
+}
+
+#content {
+    margin-bottom: 1em;
+}
+
+article {
+    text-align: justify;
+    margin: 2em 0.75em 0;
+}
+
+.post-info {
+    margin-bottom: 0.5em;
+}
+
+.intro-note, .post-note {
+    font-style: italic;
+}
+
+article > p {
+    margin-bottom: 0.5em;
+}
+
+@media all and (min-width: 600px) {
+
+    article {
+        margin: 3em 25% 0;
+    }
+    
+    article > p {
+        text-indent: 1em;
+    }
+    
+}
+
+#contentinfo {
+    text-align: center;
+    margin: 1em;
+    font-size: small;
+}
+
+/************    Navbar   *************/
+
+body {
+    background: #eee;
+    color: #444;
+    -webkit-font-smoothing: antialiased;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    font-weight: 400;
+    /*height: auto !important;*/
+    height: 100%;
+    min-height: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+#navbar {
+    background-color: rgba(0,0,0,.15);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    line-height: 3em;
+}
+
+    .black-link {
+        color: rgb(235, 235, 235);
+        text-decoration: none;
+    }
+
+    .white-link {
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: none;
+    }
+
+    #navbar > div#logo {
+        position: relative;
+    }
+    
+    #navbar > .menuDown {
+        box-shadow: 0 3px 5px rgba(0,0,0,.15);
+    }
+    
+    #navbar > .menuUp {
+        box-shadow: none;
+    }
+    
+        #navbar > div#logo > h1 {
+            color: white;
+            font-weight: 300;
+            text-transform: lowercase;
+            font-size: 1.25em;
+            text-align: left;
+            padding-left: 1em;
+        }
+        
+        #navbar > div#logo > div#navToggle {
+            background-color: rgba(0,0,0,.15);
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: 300ms all ease;
+        }
+            
+            #navbar > div#logo > div#navToggle:hover {
+                background-color: rgba(0,0,0,.1);
+            }
+            
+            #navbar > div#logo > div#navToggle > a {
+                color: rgba(255,255,255,.85);
+                display: block;
+                font-size: 0.9em;
+                font-weight: 600;
+                padding: 0 1.5rem;
+                text-decoration: none;
+                transition: 300ms all ease;
+            }
+            
+                #navbar > div#logo > div#navToggle:hover > a {
+                    color: rgba(255,255,255,1);
+                }
+
+    #navbar > nav {
+        background-color: rgba(0,0,0,0.15);
+        display: none;
+        flex: 1;
+        transform: 300ms all ease;
+    }
+    
+        #navbar nav > ul {
+            list-style-type: none;    
+        }
+        
+            #navbar nav > ul > li {
+                border-bottom: 1px dotted rgba(0,0,0,.1);
+                position: relative;
+            }
+            
+                #navbar nav > ul > li:last-of-type {
+                    border-bottom: none;    
+                }
+            
+                #navbar nav > ul > li > a {
+                    display: block;
+                    /*color: #444;*/
+                    font-weight: 700;
+                    padding: 1.5rem 0;
+                    text-decoration: none;
+                    transition: 250ms all ease;
+                }
+                
+                    #navbar nav > ul > li > a span.toggle {
+                        border-radius: 3rem;
+                        font-size: 0.75em;
+                        font-weight: 500;
+                        padding: 2px 8px;
+                        text-transform: lowercase; 
+                        background-color: rgba(111,111,111,0.75);
+                        color: white;
+                    }
+                    
+                    .caret {
+                        display: none;
+                    }
+                
+                    #navbar > nav > ul > li:hover > a {
+                        color: white;  
+                    }
+                
+            #navbar > nav > ul > li > nav {
+                background-color: rgb(51,51,51);
+                border-radius: 1.5em;
+                box-shadow: 0 2px 8px rgba(0,0,0,.6);
+                display: none;
+                overflow: hidden;
+                position: absolute;
+                right: 5%;
+                width: 90%;
+                z-index: 100;
+            }
+            
+                #navbar > nav > ul > li > nav > ul > li > a {
+                    color: rgba(255,255,255,.85);
+                    transition: 300ms all ease;
+                }
+                
+                    #navbar > nav > ul > li > nav > ul > li:hover > a {
+                        background-color: rgba(0,0,0,.6);
+                        color: rgba(255,255,255,1);
+                    }
+
+/* Medium screens */
+@media all and (min-width: 600px) {
+    #navbar > div#logo > div#navToggle {
+        display: none;    
+    }
+    
+    #navbar {
+        background-color: transparent;
+        flex-direction: row;
+        line-height: 50px;
+        padding: 0 3rem;
+        text-align: left;
+        width: 100%;
+        
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        
+    }
+    
+    .black-link {
+        color: rgb(77, 77, 77);
+        text-decoration: none;
+    }
+    
+    .white-link {
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: none;
+    }
+    
+        #navbar > div#logo {
+            background-color: transparent;
+            line-height: 50px;
+        }
+    
+            #navbar > div#logo > h1 {
+/*                color: rgba(0,0,0,.65);*/
+                font-size: 2em;
+                padding-left: 0;
+            }
+            
+    #navbar > nav {
+        background-color: transparent;
+        display: block;
+    }
+    
+        #navbar > nav > ul {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-end;    
+        }
+        
+            #navbar nav > ul > li {
+                border-bottom: none;
+            }
+    
+                #navbar nav > ul > li > a {
+                    padding: 0 1.25rem;
+                }
+                    
+                    #navbar nav > ul > li > a span.toggle {
+                        display: none;
+                    }
+                    
+                    .caret {
+                        border-bottom: 4px solid transparent;
+                        border-top: 4px solid rgba(255, 255, 255, 0.85);
+                        border-right: 4px solid transparent;
+                        border-left: 4px solid transparent;
+                        border-radius: 1px;
+                        content: "";
+                        display: inline-block;
+                        height: 0;
+                        margin: 0 0 0 .25rem;
+                        transition: 250ms all ease;
+                        width: 0;
+                        vertical-align: middle;
+                    }
+    
+    .black-caret {
+        border-top: 4px solid #4D4D4D;
+    }
+                    
+                        #navbar nav > ul > li:hover > a span.caret {
+                            border-top-color: white;
+                            transform: rotate(270deg); 
+                        }
+    
+    #navbar > nav > ul > li:hover > nav {
+        background-color: rgb(51,51,51);
+        border-radius: .25em;
+        box-shadow: 0 2px 8px rgba(0,0,0,.6);
+        display: block;
+        line-height: 3em;
+        right: auto;
+        width: 150px;
+    }
+}

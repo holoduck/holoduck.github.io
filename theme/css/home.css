@@ -1,0 +1,75 @@
+/*body {
+ width: 100vw;
+ height: 100vh;
+}*/
+
+body {
+    background: black url('/theme/images/about_bg.jpg') no-repeat fixed center;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+    background-size: cover !important;
+        }
+
+/*
+#navbar nav > ul > li > a span.toggle {
+    background-color: rgba(111,111,111,0.75);
+    color: white;
+}
+*/
+
+#who {
+    text-align: left;
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+    margin-top: 25vh;
+    margin-left: 1em;
+    margin-right: 1em;
+    padding: 1em;
+    border-radius: .75em;
+}
+
+#name{
+    font-weight: lighter;
+    font-size: 1.75em;
+}
+
+#who > p {
+    margin: 0.5em auto;
+}
+
+#icon-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+}
+
+#icon-list > li {
+    text-align: center;
+    flex: 1;
+}
+
+#contentinfo {
+    visibility: hidden;
+}
+
+@media all and (min-width: 600px) {
+    
+    .black{
+        color: #5f5f5f;
+    }
+    
+    #who {
+        margin-top: 45vh;
+        margin-left: 33vw;
+        margin-right: 33vw;
+    }
+    
+    #name{
+        font-size: 2em;
+    }
+    
+}
