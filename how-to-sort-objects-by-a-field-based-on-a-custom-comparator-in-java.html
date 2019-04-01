@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+          <title>Niccolò G. Rossetti Website - How to sort Objects by a Field based on a Custom Comparator in Java</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="/theme/css/niccolo.css" />
+
+
+
+
+    <meta name="tags" content="java" />
+
+</head>
+
+<body id="index" class="home">
+    <!-- navbar -->    
+        <header id="navbar">
+            <div id="logo" class="menuUp">
+                <h1><a
+                                class="white-link"
+                       
+                       href="http://niccolo.cc">Niccolò G. Rossetti</a></h1>
+                <div id="navToggle"><a href="#">Menu</a></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a
+                                    class="white-link"
+                           
+                           href="/index.html">Home</a></li>
+                    <li>
+                        <a 
+                                    class="white-link"
+                           
+                           href="#">Projects <span class="toggle">Expand</span><span class="caret
+                            "></span></a>
+                        <nav>
+                            <ul>
+                                <li><a href="http://bitbucket.org/holoduck/neto">Neto</a></li>
+                                <li><a href="http://hdl.handle.net/1946/23105">Master Thesis</a></li>
+                            </ul>
+                        </nav>
+                    </li>
+                    <li><a
+                                    class="white-link"
+                           
+                           href="/blog_index.html">Blog
+                        </a></li>
+                </ul>
+            </nav>
+        </header>
+    <!-- /#navbar -->
+  <div id="cover">
+    <h1 id="title">How to sort Objects by a Field based on a Custom Comparator in Java</h1>
+ 
+  </div>
+
+<section id="content" class="body">
+    
+  <article class="entry-content">
+      
+      <header class="post-info">
+        <time class="published" datetime="2019-03-28T00:00:00+01:00">
+          Thu 28 March 2019
+        </time>
+        <address class="vcard author">
+          By               <a class="url fn" href="/author/niccolo.html">Niccolò</a>
+        </address>
+      </header><!-- /.post-info -->
+    
+      
+    <p>So, you have some instances of a class and you want to sort them based
+on a specific field, but without using the natural order of such a field.
+That is, you rather need to provide a specific comparator for such a field.</p>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">Address</span> <span class="n">address</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="n">LocalDate</span> <span class="n">birthday</span><span class="o">;</span>
+
+    <span class="c1">//getters and setters</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Address</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">city</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">state</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">street</span><span class="o">;</span>
+
+    <span class="c1">//getters and setters</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Let's first clarify how we could sort instances of Person based on the natural
+order of one of its fields, e.g. the birthday.</p>
+<div class="highlight"><pre><span></span><span class="n">persons</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sort</span><span class="o">(</span><span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">getBirthday</span><span class="o">));</span>
+</pre></div>
+
+
+<p>Cool. Now, let's consider how to order <code>Person</code> based on their <code>Address</code>.
+Better, let's imagine to have to sort them based on the city and street without
+considering the state.</p>
+<p>We then need a customised comparator to order <code>Address</code>. We can achieve this
+by chaining the Comparator above:</p>
+<div class="highlight"><pre><span></span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Address</span><span class="o">&gt;</span> <span class="n">byCityAndStreet</span> <span class="o">=</span>
+    <span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="n">Address</span><span class="o">::</span><span class="n">getCity</span><span class="o">).</span><span class="na">thenComparing</span><span class="o">(</span><span class="n">Address</span><span class="o">::</span><span class="n">getStreet</span><span class="o">);</span>
+</pre></div>
+
+
+<p>This first compares <code>Address</code> based on the city field, then if this is not decisive
+(i.e. two addresses with the same city) compares them based on their street.</p>
+<p>Perfect, the next step is to use this comparator to sort the <code>Person</code>.
+This is possible thanks to another method of the <code>Comparator</code> interface:
+<code>comparing(Function&lt;? super T,? extends U&gt; keyExtractor, Comparator&lt;? super U&gt; keyComparator)</code>.
+In this method, <code>keyExtractor</code> specify how to extract the key
+used in the comparison, then applies <code>keyComparator</code> to it!</p>
+<div class="highlight"><pre><span></span><span class="n">persons</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sort</span><span class="o">(</span><span class="n">Comparator</span><span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">getAddress</span><span class="o">),</span> <span class="n">byCityAndStreet</span><span class="o">);</span>
+</pre></div>
+
+
+<p>And here we are, we have successfully sorted java objects based
+on a custom comparator applied to two fields of a nested object.</p>
+      
+      
+  </article><!-- /.entry-content -->
+    
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by hand-crafted styles, templates and <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/theme/js/niccolo.js"></script>
+    
+</body>
+</html>
