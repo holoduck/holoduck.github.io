@@ -53,19 +53,19 @@ body {
 }
 
 @media all and (min-width: 600px) {
-    
+
     .black{
         color: #5f5f5f;
     }
-    
+
     #who {
         margin-top: 45vh;
         margin-left: 33vw;
         margin-right: 33vw;
     }
-    
+
     #name{
         font-size: 2em;
     }
-    
+
 }
