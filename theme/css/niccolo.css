@@ -57,7 +57,7 @@ article {
 }
 
 article > p {
-    margin: 1em;
+    margin: 1em 0em;
 }
 
 @media all and (min-width: 600px) {

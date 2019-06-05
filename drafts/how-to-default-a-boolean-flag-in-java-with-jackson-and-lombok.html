@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+          <title>Niccolò G. Rossetti Website - How to default a Boolean Flag in Java with Jackson and Lombok</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="/theme/css/niccolo.css" />
+
+
+
+
+    <meta name="tags" content="java" />
+
+</head>
+
+<body id="index" class="home">
+    <!-- navbar -->    
+        <header id="navbar">
+            <div id="logo" class="menuUp">
+                <h1><a
+                                class="white-link"
+                       
+                       href="http://niccolo.cc">Niccolò G. Rossetti</a></h1>
+                <div id="navToggle"><a href="#">Menu</a></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a
+                                    class="white-link"
+                           
+                           href="/index.html">Home</a></li>
+                    <li>
+                        <a 
+                                    class="white-link"
+                           
+                           href="#">Projects <span class="toggle">Expand</span><span class="caret
+                            "></span></a>
+                        <nav>
+                            <ul>
+                                <li><a href="http://bitbucket.org/holoduck/neto">Neto</a></li>
+                                <li><a href="http://hdl.handle.net/1946/23105">Master Thesis</a></li>
+                            </ul>
+                        </nav>
+                    </li>
+                    <li><a
+                                    class="white-link"
+                           
+                           href="/blog_index.html">Blog
+                        </a></li>
+                </ul>
+            </nav>
+        </header>
+    <!-- /#navbar -->
+  <div id="cover">
+    <h1 id="title">How to default a Boolean Flag in Java with Jackson and Lombok</h1>
+ 
+  </div>
+
+<section id="content" class="body">
+    
+  <article class="entry-content">
+      
+      <header class="post-info">
+        <time class="published" datetime="2019-04-02T00:00:00+02:00">
+          Tue 02 April 2019
+        </time>
+        <address class="vcard author">
+          By               <a class="url fn" href="/author/niccolo.html">Niccolò</a>
+        </address>
+      </header><!-- /.post-info -->
+    
+      
+    <p>An apparently trivial request can hide surprising gotchas.</p>
+<h2>Context</h2>
+<p>Imagine to be developing a REST API in Java.
+One of your endpoint is a POST which accepts a DTO that contains a boolean flag.
+That flag is not mandatory in your DTO, thus it can be missing in the request.
+A QA engineer comes to you with a specific request:
+the boolean flag on your DTO should assume a default value
+whenever the flag is either missing or it is <code>null</code> in the JSON of the request.</p>
+<p>To get it spicier, assume the default value to be <code>True</code>.</p>
+<h2>Technologies:</h2>
+<p>We assume to be using:</p>
+<ol>
+<li>Jackson (v. ?) for deserialisation (for what it matters, on top of Spring Boot)</li>
+<li>Lombok (1.?) to make the task a bit more spicy.</li>
+</ol>
+<h2>An Example class</h2>
+<div class="highlight"><pre><span></span><span class="nd">@Data</span>
+<span class="nd">@Builder</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+<span class="o">}</span>
+</pre></div>
+
+
+<h2>Solution 1</h2>
+<p>Jackson is configurable in many way, one of these would solve the request we received.
+It's probably the shortest possible solution, but the one with the biggest impact, therefore mind whether it can be applied to the project at hand.</p>
+<p>objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES);</p>
+<p>As per its java doc, this would throw an error in case the flag is null [or it is missing?].
+Thus avoiding to get the default of the JVM or null.</p>
+      
+      
+  </article><!-- /.entry-content -->
+    
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by hand-crafted styles, templates and <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/theme/js/niccolo.js"></script>
+    
+</body>
+</html>
