@@ -16,7 +16,7 @@ a {
 /*end reset*/
 
 #cover{
-    
+
 }
 
 #title {
@@ -338,3 +338,18 @@ body {
 }
 
 pre{background-color:  rgb(255, 255, 255); padding: 10px; margin: 10px; overflow: auto;}
+
+/***    start styles for code  ***/
+/* TODO: see how to set them if possible in a tool.  */
+.highlight {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
+pre {
+    background-color: inherit;
+}
+
+/***    end styles for code  */
